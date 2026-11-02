@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-11-02
+
+### Added
+
+- Course data for 2025/2026-2, 2025/2026-3 and 2026/2027-1
+- Fall 2026 semester dates for calendar export
+- `scripts/scrape.mjs` to download the schedule from the public registration pages
+- Daily GitHub Action that refreshes course data and deploys the site
+
+### Changes
+
+- Real classroom names instead of "Online" for 2025/2026-2
+
 ## [1.2.0] - 2025-09-06
 
 ### Added
