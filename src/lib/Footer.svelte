@@ -10,4 +10,25 @@
     > for most up-to-date schedule. The schedule information presented in this page
     may sometimes lag behind the registration website.
   </small>
+  <p class="text-xs mt-2">
+    Made by
+    <a
+      class="underline hover:text-blue-500"
+      href="https://github.com/kilicbaran"
+      target="_blank"
+      rel="noopener noreferrer">kilicbaran</a
+    >
+    (<a
+      class="underline hover:text-blue-500"
+      href="https://github.com/kilicbaran/boun-course-planner"
+      target="_blank"
+      rel="noopener noreferrer">source</a
+    >) and maintained by
+    <a
+      class="underline hover:text-blue-500"
+      href="https://github.com/emiroercan/boun-course-planner"
+      target="_blank"
+      rel="noopener noreferrer">Emir Ercan</a
+    >
+  </p>
 </div>

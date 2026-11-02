@@ -4,6 +4,8 @@
   import Timetable from "./lib/Timetable.svelte";
   import CourseList from "./lib/CourseList.svelte";
   import GoogleAnalytics from "./lib/GoogleAnalytics.svelte";
+  import BuisTimetable from "./lib/BuisTimetable.svelte";
+  import { getBuisMode } from "./lib/globalState.svelte";
 </script>
 
 <main
@@ -15,7 +17,11 @@
     <div
       class="w-full md:w-5/12 p-2 flex flex-col shrink-0 md:grow md:overflow-y-auto md:min-h-0"
     >
-      <Timetable />
+      {#if getBuisMode()}
+        <BuisTimetable />
+      {:else}
+        <Timetable />
+      {/if}
       <CourseList />
     </div>
     <div class="w-full md:w-7/12 p-2 flex flex-col grow h-full">

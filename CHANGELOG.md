@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fall 2026 semester dates for calendar export
 - `scripts/scrape.mjs` to download the schedule from the public registration pages
 - Daily GitHub Action that refreshes course data and deploys the site
+- BUIS mode: timetable that looks like the BUIS schedule planner (toggle in the header)
+- Footer credit: made by kilicbaran, maintained by Emir Ercan
 
 ### Changes
 

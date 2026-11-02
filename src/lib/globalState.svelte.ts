@@ -250,3 +250,27 @@ const curSemCategories = $derived.by(() => {
 export function getCurSemCategories() {
   return curSemCategories;
 }
+
+// BUIS planner mode: show the timetable the way the BUIS registration system does
+function readBuisMode() {
+  try {
+    return localStorage.getItem("buisMode") === "1";
+  } catch {
+    return false;
+  }
+}
+
+let buisMode = $state(readBuisMode());
+
+export function getBuisMode() {
+  return buisMode;
+}
+
+export function setBuisMode(value: boolean) {
+  buisMode = value;
+  try {
+    localStorage.setItem("buisMode", value ? "1" : "0");
+  } catch {
+    // storage unavailable; keep the setting for this visit only
+  }
+}

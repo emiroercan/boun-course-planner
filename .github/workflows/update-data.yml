@@ -1,6 +1,8 @@
 name: Update course data
 
 on:
+  push:
+    branches: [main]
   schedule:
     - cron: "0 4 * * *" # every day at 07:00 Istanbul time
   workflow_dispatch:
@@ -28,6 +30,7 @@ jobs:
           cache: npm
 
       - name: Scrape schedule
+        if: github.event_name != 'push'
         run: node scripts/scrape.mjs ${{ github.event.inputs.semesters }}
 
       - name: Commit changed data
@@ -46,13 +49,13 @@ jobs:
           fi
 
       - name: Build
-        if: steps.commit.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        if: steps.commit.outputs.changed == 'true' || github.event_name != 'schedule'
         run: |
           npm ci
           npm run build
 
       - name: Deploy to gh-pages
-        if: steps.commit.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        if: steps.commit.outputs.changed == 'true' || github.event_name != 'schedule'
         run: |
           cd dist
           git init -q -b gh-pages
