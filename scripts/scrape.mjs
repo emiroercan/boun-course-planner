@@ -5,6 +5,7 @@
 // Usage:
 //   node scripts/scrape.mjs              # refresh the newest semesters listed by the university
 //   node scripts/scrape.mjs 2026/2027-1  # refresh specific semesters
+//   FORCE=1 node scripts/scrape.mjs ...  # overwrite even if far fewer courses than before
 //
 // Data source: the per-department pages at /scripts/sch.asp. The newer
 // /BUIS/General/schedule.aspx page needs a reCAPTCHA token for every search,
@@ -189,11 +190,20 @@ function parseDepartmentPage(html, courses) {
 
 async function scrapeSemester(semester, departments) {
   const courses = {};
+  const failed = [];
   for (const { kisaadi, bolum } of departments) {
     const url = `${BASE}/scripts/sch.asp?donem=${semester}&kisaadi=${kisaadi}&bolum=${bolum}`;
-    const html = await get(url);
-    parseDepartmentPage(html, courses);
+    try {
+      parseDepartmentPage(await get(url), courses);
+    } catch (err) {
+      // One broken page should not stop the whole run
+      console.warn(`warning: ${err.message}`);
+      failed.push(kisaadi);
+    }
     await sleep(DELAY_MS);
+  }
+  if (failed.length > departments.length * 0.1) {
+    throw new Error(`${semester}: ${failed.length} department pages failed (${failed.join(", ")})`);
   }
   // Sort keys so diffs between runs stay small
   return Object.fromEntries(
@@ -235,7 +245,8 @@ async function main() {
     try {
       const old = JSON.parse(await readFile(file, "utf8"));
       const oldCount = Object.keys(old).length;
-      if (count < oldCount * 0.5) {
+      // FORCE=1 skips this check when the old file is known to be wrong
+      if (count < oldCount * 0.5 && !process.env.FORCE) {
         throw new Error(
           `${semester}: only ${count} courses vs ${oldCount} before; not overwriting`
         );

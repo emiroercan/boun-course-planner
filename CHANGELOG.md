@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-11-02
+
+### Added
+
+- Course data for every semester back to 1999/2000-1, plus the missing 2024/2025-2
+- View buttons in the header: BUIS Planner (default), Regular, and Preparation (looks like the registration course schedule page, with numbered conflicts, no section numbers)
+- Show/hide classrooms button under the timetable (on by default), works in every view
+- Widen view button to give the timetable more of the screen
+- Timetables show 9-14 and only add later hours when a course needs them
+- Phone layout: header buttons span the width, BUIS Planner and Regular fit the screen, Preparation keeps the registration layout with smaller text
+- BUIS Planner: Expand button to show all hours, and a drag handle to resize the schedule
+- Semester dates and holidays are read from the official academic calendar automatically
+- Daily update runs at 18:00 Istanbul time and opens an issue when it fails or a new semester appears
+
+### Fixed
+
+- Classroom data re-downloaded for 2017-2026 (some semesters had none or only "Online")
+- Summer 2023 data was a copy of Spring 2023; replaced with the real summer courses
+- Scraper skips a single broken department page instead of stopping
+- BUIS Planner: courses keep their color when other courses are added or removed
+
 ## [1.3.0] - 2026-11-02
 
 ### Added
@@ -15,7 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fall 2026 semester dates for calendar export
 - `scripts/scrape.mjs` to download the schedule from the public registration pages
 - Daily GitHub Action that refreshes course data and deploys the site
-- BUIS mode: timetable that looks like the BUIS schedule planner (toggle in the header)
+- BUIS Planner view: timetable that looks like the BUIS schedule planner (toggle in the header)
 - Footer credit: made by kilicbaran, maintained by Emir Ercan
 
 ### Changes

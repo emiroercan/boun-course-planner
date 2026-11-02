@@ -4,7 +4,19 @@
     getHoveredCourse,
     getCurSemesterData,
     getCurrentSemester,
+    getShowRooms,
+    roomAt,
   } from "./globalState.svelte";
+
+  // Classroom of a course at a given day and clock hour (9..22)
+  function roomFor(courseName: string, day: string, hour: number) {
+    const course = getCurSemesterData()?.[courseName];
+    if (!course?.days) return "";
+    const i = course.days.findIndex(
+      (d: string, j: number) => d === day && course.hours[j] === hour - 8
+    );
+    return i === -1 ? "" : roomAt(course, i);
+  }
 
   const calculateTable = $derived(
     getCurrentSemester() != "" &&
@@ -97,7 +109,7 @@
         St: [],
       });
     }
-    latestCourseHour = 16;
+    latestCourseHour = 14;
     if (calculateTable) {
       for (let i = 0; i < selectedCourseNames.length; i++) {
         const courseName = selectedCourseNames[i];
@@ -136,17 +148,17 @@
   class="bg-white dark:bg-gray-800 dark:text-white shadow rounded-lg w-full shrink-0 overflow-x-auto"
 >
   <table
-    class="table-fixed text-center w-full text-sm lg:text-base antialiased tracking-tight sm:tracking-normal"
+    class="table-fixed text-center w-full text-[11px] sm:text-sm lg:text-base antialiased tracking-tight sm:tracking-normal"
   >
     <thead>
       <tr>
-        <th class="w-4 md:w-6"></th>
-        <th class="w-20"> Mon </th>
-        <th class="w-20"> Tue </th>
-        <th class="w-20"> Wed </th>
-        <th class="w-20"> Thu </th>
-        <th class="w-20"> Fri </th>
-        <th class="w-20 {courseOnSaturday ? '' : 'hidden'}"> Sat </th>
+        <th class="w-6"></th>
+        <th> Mon </th>
+        <th> Tue </th>
+        <th> Wed </th>
+        <th> Thu </th>
+        <th> Fri </th>
+        <th class="{courseOnSaturday ? '' : 'hidden'}"> Sat </th>
       </tr>
     </thead>
     <tbody>
@@ -159,7 +171,12 @@
                   ? 'bg-green-200 text-green-700 dark:bg-green-800 dark:text-green-300 rounded'
                   : ''}"
               >
-                {course}
+                {course.split(".")[0]}<wbr />.{course.split(".").slice(1).join(".")}
+                {#if getShowRooms() && roomFor(course, "M", row.hour)}
+                  <div class="text-[10px] leading-none opacity-70">
+                    {roomFor(course, "M", row.hour)}
+                  </div>
+                {/if}
               </div>{/each}</td
           >
           <td class={row["T"].length > 1 ? "bg-red-100 dark:bg-red-900" : ""}
@@ -168,7 +185,12 @@
                   ? 'bg-green-200 text-green-700 dark:bg-green-800 dark:text-green-300 rounded'
                   : ''}"
               >
-                {course}
+                {course.split(".")[0]}<wbr />.{course.split(".").slice(1).join(".")}
+                {#if getShowRooms() && roomFor(course, "T", row.hour)}
+                  <div class="text-[10px] leading-none opacity-70">
+                    {roomFor(course, "T", row.hour)}
+                  </div>
+                {/if}
               </div>{/each}</td
           >
           <td class={row["W"].length > 1 ? "bg-red-100 dark:bg-red-900" : ""}
@@ -177,7 +199,12 @@
                   ? 'bg-green-200 text-green-700 dark:bg-green-800 dark:text-green-300 rounded'
                   : ''}"
               >
-                {course}
+                {course.split(".")[0]}<wbr />.{course.split(".").slice(1).join(".")}
+                {#if getShowRooms() && roomFor(course, "W", row.hour)}
+                  <div class="text-[10px] leading-none opacity-70">
+                    {roomFor(course, "W", row.hour)}
+                  </div>
+                {/if}
               </div>{/each}</td
           >
           <td class={row["Th"].length > 1 ? "bg-red-100 dark:bg-red-900" : ""}
@@ -186,7 +213,12 @@
                   ? 'bg-green-200 text-green-700 dark:bg-green-800 dark:text-green-300 rounded'
                   : ''}"
               >
-                {course}
+                {course.split(".")[0]}<wbr />.{course.split(".").slice(1).join(".")}
+                {#if getShowRooms() && roomFor(course, "Th", row.hour)}
+                  <div class="text-[10px] leading-none opacity-70">
+                    {roomFor(course, "Th", row.hour)}
+                  </div>
+                {/if}
               </div>{/each}</td
           >
           <td class={row["F"].length > 1 ? "bg-red-100 dark:bg-red-900" : ""}
@@ -195,7 +227,12 @@
                   ? 'bg-green-200 text-green-700 dark:bg-green-800 dark:text-green-300 rounded'
                   : ''}"
               >
-                {course}
+                {course.split(".")[0]}<wbr />.{course.split(".").slice(1).join(".")}
+                {#if getShowRooms() && roomFor(course, "F", row.hour)}
+                  <div class="text-[10px] leading-none opacity-70">
+                    {roomFor(course, "F", row.hour)}
+                  </div>
+                {/if}
               </div>{/each}</td
           >
           <td
@@ -207,7 +244,12 @@
                   ? 'bg-green-200 text-green-700 dark:bg-green-800 dark:text-green-300 rounded'
                   : ''}"
               >
-                {course}
+                {course.split(".")[0]}<wbr />.{course.split(".").slice(1).join(".")}
+                {#if getShowRooms() && roomFor(course, "St", row.hour)}
+                  <div class="text-[10px] leading-none opacity-70">
+                    {roomFor(course, "St", row.hour)}
+                  </div>
+                {/if}
               </div>{/each}</td
           >
         </tr>

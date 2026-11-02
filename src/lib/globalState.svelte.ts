@@ -251,26 +251,86 @@ export function getCurSemCategories() {
   return curSemCategories;
 }
 
-// BUIS planner mode: show the timetable the way the BUIS registration system does
-function readBuisMode() {
+// Timetable view: "buis" (BUIS Planner, default), "regular" or "prep" (registration page)
+export type ViewMode = "regular" | "buis" | "prep";
+const VIEW_MODES: ViewMode[] = ["regular", "buis", "prep"];
+
+function readSetting(key: string) {
   try {
-    return localStorage.getItem("buisMode") === "1";
+    return localStorage.getItem(key);
   } catch {
-    return false;
+    return null;
   }
 }
 
-let buisMode = $state(readBuisMode());
-
-export function getBuisMode() {
-  return buisMode;
+function writeSetting(key: string, value: string) {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    // storage unavailable; setting lasts for this visit only
+  }
 }
 
-export function setBuisMode(value: boolean) {
-  buisMode = value;
-  try {
-    localStorage.setItem("buisMode", value ? "1" : "0");
-  } catch {
-    // storage unavailable; keep the setting for this visit only
+function readViewMode(): ViewMode {
+  const v = readSetting("viewMode") as ViewMode | null;
+  if (v && VIEW_MODES.includes(v)) return v;
+  if ((v as string) === "native") return "regular"; // renamed
+  return "buis";
+}
+
+let viewMode: ViewMode = $state(readViewMode());
+
+export function getViewMode() {
+  return viewMode;
+}
+
+export function setViewMode(value: ViewMode) {
+  viewMode = value;
+  writeSetting("viewMode", value);
+}
+
+let showRooms = $state(readSetting("showRooms") !== "0"); // on by default
+
+export function getShowRooms() {
+  return showRooms;
+}
+
+export function setShowRooms(value: boolean) {
+  showRooms = value;
+  writeSetting("showRooms", value ? "1" : "0");
+}
+
+// Give the timetable more of the screen width
+let wideView = $state(readSetting("wideView") === "1");
+
+export function getWideView() {
+  return wideView;
+}
+
+export function setWideView(value: boolean) {
+  wideView = value;
+  writeSetting("wideView", value ? "1" : "0");
+}
+
+/**
+ * Last clock hour to show: 14, or later if a selected or hovered course needs it
+ */
+export function lastHourToShow(): number {
+  const data = getCurSemesterData();
+  let last = 14;
+  if (!data) return last;
+  const names = [...getSelectedCourseNames()];
+  if (hoveredCourse) names.push(hoveredCourse);
+  for (const name of names) {
+    for (const h of data[name]?.hours ?? []) last = Math.max(last, h + 8);
   }
+  return Math.min(last, 22);
+}
+
+/** Classroom of a course's i-th time slot ("" if unknown) */
+export function roomAt(course: any, i: number): string {
+  const rooms: string[] | undefined = course?.rooms;
+  if (!rooms || rooms.length === 0) return "";
+  if (rooms.length === course.days?.length) return rooms[i] ?? "";
+  return rooms.length === 1 ? rooms[0] : "";
 }

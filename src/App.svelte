@@ -5,7 +5,9 @@
   import CourseList from "./lib/CourseList.svelte";
   import GoogleAnalytics from "./lib/GoogleAnalytics.svelte";
   import BuisTimetable from "./lib/BuisTimetable.svelte";
-  import { getBuisMode } from "./lib/globalState.svelte";
+  import PrepTimetable from "./lib/PrepTimetable.svelte";
+  import TimetableOptions from "./lib/TimetableOptions.svelte";
+  import { getViewMode, getWideView } from "./lib/globalState.svelte";
 </script>
 
 <main
@@ -15,16 +17,21 @@
 
   <div class="flex flex-col md:flex-row grow md:overflow-hidden">
     <div
-      class="w-full md:w-5/12 p-2 flex flex-col shrink-0 md:grow md:overflow-y-auto md:min-h-0"
+      class="w-full {getWideView()
+        ? 'md:w-8/12'
+        : 'md:w-5/12'} p-2 flex flex-col shrink-0 md:grow md:overflow-y-auto md:min-h-0"
     >
-      {#if getBuisMode()}
+      {#if getViewMode() === "buis"}
         <BuisTimetable />
+      {:else if getViewMode() === "prep"}
+        <PrepTimetable />
       {:else}
         <Timetable />
       {/if}
+      <TimetableOptions />
       <CourseList />
     </div>
-    <div class="w-full md:w-7/12 p-2 flex flex-col grow h-full">
+    <div class="w-full {getWideView() ? 'md:w-4/12' : 'md:w-7/12'} p-2 flex flex-col grow h-full">
       <CourseCatalogue />
     </div>
   </div>
