@@ -1,0 +1,180 @@
+{
+    "2024-2025-1": {
+        "start": "2024-09-23",
+        "end": "2024-12-20",
+        "holidays": [
+            {
+                "date": "2024-10-28",
+                "name": "Republic Day (half day)",
+                "timeType": "after",
+                "time": "13:00"
+            },
+            {
+                "date": "2024-10-29",
+                "name": "Republic Day"
+            }
+        ]
+    },
+    "2024-2025-2": {
+        "start": "2025-02-10",
+        "end": "2025-05-16",
+        "holidays": [
+            {
+                "date": "2025-03-29",
+                "name": "Religious Holiday (half day)",
+                "timeType": "after",
+                "time": "13:00"
+            },
+            {
+                "date": "2025-03-30",
+                "name": "Religious Holiday"
+            },
+            {
+                "date": "2025-03-31",
+                "name": "Religious Holiday"
+            },
+            {
+                "date": "2025-04-01",
+                "name": "Religious Holiday"
+            },
+            {
+                "date": "2025-04-23",
+                "name": "National Sovereignty and Children's Day"
+            },
+            {
+                "date": "2025-04-28",
+                "name": "Spring Break"
+            },
+            {
+                "date": "2025-04-29",
+                "name": "Spring Break"
+            },
+            {
+                "date": "2025-04-30",
+                "name": "Spring Break"
+            },
+            {
+                "date": "2025-05-01",
+                "name": "Spring Break"
+            },
+            {
+                "date": "2025-05-01",
+                "name": "Labor Day"
+            },
+            {
+                "date": "2025-05-02",
+                "name": "Spring Break"
+            }
+        ]
+    },
+    "2025-2026-1": {
+        "start": "2025-09-22",
+        "end": "2025-12-19",
+        "holidays": [
+            {
+                "date": "2025-10-28",
+                "name": "Republic Day (half day)",
+                "timeType": "after",
+                "time": "13:00"
+            },
+            {
+                "date": "2025-10-29",
+                "name": "Republic Day"
+            }
+        ]
+    },
+    "2025-2026-2": {
+        "start": "2026-02-09",
+        "end": "2026-05-15",
+        "holidays": [
+            {
+                "date": "2026-03-19",
+                "name": "Religious Holiday (half day)",
+                "timeType": "after",
+                "time": "13:00"
+            },
+            {
+                "date": "2026-03-20",
+                "name": "Religious Holiday"
+            },
+            {
+                "date": "2026-03-21",
+                "name": "Religious Holiday"
+            },
+            {
+                "date": "2026-03-22",
+                "name": "Religious Holiday"
+            },
+            {
+                "date": "2026-04-20",
+                "name": "Spring Break"
+            },
+            {
+                "date": "2026-04-21",
+                "name": "Spring Break"
+            },
+            {
+                "date": "2026-04-22",
+                "name": "Spring Break"
+            },
+            {
+                "date": "2026-04-23",
+                "name": "Spring Break"
+            },
+            {
+                "date": "2026-04-23",
+                "name": "National Sovereignty and Children's Day"
+            },
+            {
+                "date": "2026-04-24",
+                "name": "Spring Break"
+            },
+            {
+                "date": "2026-05-01",
+                "name": "Labor Day"
+            }
+        ]
+    },
+    "2026-2027-1": {
+        "start": "2026-09-21",
+        "end": "2026-12-11",
+        "holidays": [
+            {
+                "date": "2026-10-28",
+                "name": "Republic Day (half day)",
+                "timeType": "after",
+                "time": "13:00"
+            },
+            {
+                "date": "2026-10-29",
+                "name": "Republic Day"
+            }
+        ]
+    },
+    "2026-2027-2": {
+        "start": "2027-01-18",
+        "end": "2027-04-22",
+        "holidays": [
+            {
+                "date": "2027-03-08",
+                "name": "Spring Break / Religious Holiday"
+            },
+            {
+                "date": "2027-03-09",
+                "name": "Spring Break / Religious Holiday"
+            },
+            {
+                "date": "2027-03-10",
+                "name": "Spring Break / Religious Holiday"
+            },
+            {
+                "date": "2027-03-11",
+                "name": "Spring Break / Religious Holiday"
+            },
+            {
+                "date": "2027-03-12",
+                "name": "Spring Break / Religious Holiday"
+            }
+        ]
+    }
+}
